@@ -1,0 +1,17 @@
+* {
+  font-family: "Roboto", serif;
+  background-color: #f3f3f3;
+}
+@media (min-width: 481px) and (max-width: 767px) {
+  .topo {
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .icone-people {
+    font-size: 45px;
+    background-color: transparent;
+  }
+}
