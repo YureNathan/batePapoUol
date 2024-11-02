@@ -9,35 +9,67 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="icon" href="./images/favicon.ico">
   <title>Bate Papo - UOL</title>
 </head>
 
 <body>
-  <header class="topo">
-    <img src="./images/logo.png" alt="logo bate-papo">
-    <ion-icon name="people" class="icone-people"></ion-icon>
-  </header>
-  <section class="chat">
-    <div>
-      ashjahjsahjshjasjh
-    </div>
-    <div>
-      ashjahjsahjshjasjh
-    </div>
-    <div>
-      ashjahjsahjshjasjh
-    </div>
-  </section>
-  <footer class="rodape">
-    <div class="rodape-input">
-      <input type="text" class="mensagem" placeholder="Escreva aqui...">
-      <p>Enviando para Todos (público)</p>
-    </div>
-    <ion-icon class="botao" name="paper-plane-outline"></ion-icon>
-  </footer>
-  <script src="script.js"></script>
+  <main class="conteudo">
+    <aside class="menuLateral">
+      <h1>Escolha um contato para enviar mensagem:</h1>
+      <div class="usuarios">
+        <ion-icon name="people" class="people"></ion-icon>
+        <p>Todos</p>
+      </div>
+      <div class="usuarios">
+        <ion-icon name="person-circle" class="people"></ion-icon>
+        <p>Jumo</p>
+      </div>
+      <h2>Escolha a visibilidade:</h2>
+      <div class="visibilidade">
+        <ion-icon name="lock-open"></ion-icon>
+        <p>Público</p>
+      </div>
+      <div class="visibilidade">
+        <ion-icon name="lock-open"></ion-icon>
+        <p>Reservadamente</p>
+        <ion-icon name="checkmark"></ion-icon>
+      </div>
+    </aside>
+
+    <header class="topo">
+      <img src="./images/logo.png" alt="logo bate-papo">
+      <ion-icon name="people" class="icone-people"></ion-icon>
+    </header>
+    <section class="chat">
+      <div class="chatMensagem">
+        <span class="time">(09:21:45)</span>
+        <span class="user">Jumo</span>
+        <span>entra na sala...</span>
+      </div>
+      <div class="chatMensagem">
+        <span class="time">(09:21:45)</span>
+        <span class="user">Jumo</span>
+        <span>entra na sala...</span>
+      </div>
+      <div class="chatMensagem">
+        <span class="time">(09:21:45)</span>
+        <span class="user">Jumo</span>
+        <span>entra na sala...</span>
+      </div>
+    </section>
+    <footer class="rodape">
+      <div class="rodapeMensagem">
+        <input type="text" class="mensagem" placeholder="Escreva aqui...">
+        <p class="tipoSala">Enviando para Todos (público)</p>
+      </div>
+      <ion-icon class="botao" name="paper-plane-outline"></ion-icon>
+    </footer>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
