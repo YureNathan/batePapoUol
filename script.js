@@ -1,42 +1,68 @@
-const acessAPI =
-  "https://mock-api.driven.com.br/api/v6/uol/participants/5ad41206-f9b5-4be4-b498-e6b82295439c";
+const url =
+  "https://mock-api.driven.com.br/api/v6/uol/participants/8c4912e2-6a29-4502-be46-830d79eae761";
+
+let usuario;
+let tempoUsuario;
 const mensagem = {
   hours: "20:31:01",
   name: "jumo",
   status: "entra na sala",
   mensage: "olá",
 };
+
 function getUser() {
-  let usuario = prompt("Qual seu nome?");
-  const resposta = axios.post(`${acessAPI}`, { name: `${usuario}` });
-  resposta.then(sucess);
-  resposta.catch(error);
-  while (promess.status === 400) {
-    let usuario = prompt("Qual seu nome?");
+  usuario = prompt("Qual seu nome?");
+  if (usuario === null) {
+    console.log("O usuário cancelou a operação.");
+    return;
   }
+  axios
+    .post(url, { name: usuario })
+    .then(() => {
+      alert("Nome cadastrado com sucesso!");
+    })
+    .catch((error) => {
+      if (error.response.status === 400) {
+        alert("Erro ao registrar esse nome. Tente novamente.");
+        getUser();
+      } else {
+        alert(
+          "Ocorreu um erro ao tentar verificar o nome. Tente novamente mais tarde."
+        );
+      }
+    });
 }
-
-function sucess(promess) {
-  console.log(promess);
+function renderizarMensagem(mensagem) {
+  document.querySelector(".user").innerHTML = mensagem.name;
 }
-
-function error(promess) {}
-// para entrar na sala
-// getUser();
-
+function verificarConexao() {
+  tempoUsuario = setInterval(() => {
+    axios
+      .post(url, { name:usuario })
+      .then(() => {
+        console.log("Usuário ainda está presente.");
+      })
+      .catch((error) => {
+        pararHeartbeat();
+      });
+  }, 5000);
+}
+function pararHeartbeat() {
+  clearInterval(tempoUsuario);
+  console.log("usuário saiu da sala.");
+}
 function getMensages() {
-  const ul = document.querySelector(".chatMensagem");
-  ul.innerHTML += `
-  <li>${mensagem.hours}</li>
- `;
+  const promess = axios.get(url);
+  promess.then(renderizarMensagem);
 }
+getUser();
 // getMensages();
-
-// function menu 
+verificarConexao();
+// function menu
 
 function toggleMenu() {
-  const menuLateral = document.querySelector('.menu-lateral');
-  const fundoMenu = document.querySelector('.fundo-menu');
-  menuLateral.classList.toggle('active');
-  fundoMenu.classList.toggle('active');
+  const menuLateral = document.querySelector(".menu-lateral");
+  const fundoMenu = document.querySelector(".fundo-menu");
+  menuLateral.classList.toggle("active");
+  fundoMenu.classList.toggle("active");
 }

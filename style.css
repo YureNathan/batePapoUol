@@ -38,7 +38,7 @@ body {
   --mensagemChat: #fff;
 }
 .chatMensagem {
-  background-color: #dcdcdc;
+  background-color: var(--mensagemStatus);
   height: 46px;
   padding: 8px;
   display: flex;
