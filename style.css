@@ -4,6 +4,11 @@ body {
 }
 
 @media (min-width: 310px) and (max-width: 1024px) {
+  .conteudo {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
   .topo {
     background-color: #fff;
     padding: 20px;
@@ -17,16 +22,14 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 1.5;
   }
   .icone-people {
-    font-size: 45px;
+    font-size: 2.81rem;
   }
 }
 .chat {
-  position: relative;
   margin-top: 106px;
-  /* height: 100vh; */
 }
 /* verificar se da pra acessar a váriavel css no js acredito que tenha trocar no backgroud-color */
 .chatMensagem {
@@ -45,7 +48,7 @@ body {
   width: 100%;
 }
 span {
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 .chatMensagem .time {
   color: #aaa;
@@ -67,7 +70,7 @@ span {
   bottom: 0;
 }
 .mensagem {
-  font-size: 18px;
+  font-size: 1.125rem;
   padding-left: 5px;
   width: 100%;
 }
@@ -92,31 +95,60 @@ span {
   font-size: 30px;
 }
 
-.menuLateral {
-  /* background-color: red; */
+.menu-lateral {
   display: flex;
+  background-color: #fff;
   flex-direction: column;
-  align-items: center;
-  padding: 7px;
-  /* height: 100vh; */
+  width: 275px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0px;
+  z-index: 2;
+  padding: 12px;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
 }
-.menuLateral h1,
-h2 {
-  text-align: center;
+.menu-lateral h2 {
+  font-size: 1rem;
   font-weight: bold;
-  font-size: 16px;
-  margin: 4px 0px;
-  
+  margin: 15px 0px;
+  text-align: center;
+  line-height: 1.5;
 }
-.usuarios,
-.visibilidade {
+li {
   display: flex;
-  width: 198px;
-  gap: 10px;
-
-  margin-bottom: 10px;
   align-items: center;
+  gap: 5px;
+  margin: 7px 0px;
 }
-.usuarios .people {
-  font-size: 25px;
+
+li ion-icon {
+  font-size: 1.56rem;
+}
+li .check {
+  margin-left: 70px;
+  color: #28bb25;
+  --ionicon-stroke-width: 55px;
+}
+li span {
+  font-size: 1rem;
+  width: 120px;
+}
+.fundo-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1;
+}
+.menu-lateral.active {
+  transform: none;
+}
+
+.fundo-menu.active {
+  display: block;
 }

@@ -15,31 +15,38 @@
 
 <body>
   <main class="conteudo">
-    <aside class="menuLateral">
-      <h1>Escolha um contato para enviar mensagem:</h1>
-      <div class="usuarios">
-        <ion-icon name="people" class="people"></ion-icon>
-        <p>Todos</p>
-      </div>
-      <div class="usuarios">
-        <ion-icon name="person-circle" class="people"></ion-icon>
-        <p>Jumo</p>
-      </div>
+    <section class="menu-lateral">
+      <h2>Escolha um contato para enviar mensagem:</h2>
+      <ul class="usuarios">
+        <li>
+          <ion-icon name="people"></ion-icon>
+          <span>Todos</span>
+          <ion-icon name="checkmark" class="check"></ion-icon>
+        </li>
+        <li>
+          <ion-icon name="person-circle"></ion-icon>
+          <span>user maria</span>
+        </li>
+        <li>
+          <ion-icon name="person-circle"></ion-icon>
+          <span>user maria da silva</span>
+        </li>
+      </ul>
       <h2>Escolha a visibilidade:</h2>
-      <div class="visibilidade">
-        <ion-icon name="lock-open"></ion-icon>
-        <p>Público</p>
-      </div>
-      <div class="visibilidade">
-        <ion-icon name="lock-open"></ion-icon>
-        <p>Reservadamente</p>
-        <ion-icon name="checkmark"></ion-icon>
-      </div>
-    </aside>
-
+      <ul>
+        <li><ion-icon name="lock-open"></ion-icon>
+          <span>Público</span>
+        </li>
+        <li><ion-icon name="lock-closed"></ion-icon>
+          <span>Reservadamente</span>
+          <ion-icon name="checkmark" class="check"></ion-icon>
+        </li>
+      </ul>
+    </section>
+    <div class="fundo-menu" onclick="toggleMenu()"></div>
     <header class="topo">
       <img src="./images/logo.png" alt="logo bate-papo">
-      <ion-icon name="people" class="icone-people"></ion-icon>
+      <ion-icon onclick="toggleMenu()" name="people" class="icone-people"></ion-icon>
     </header>
     <section class="chat">
       <div class="chatMensagem">
@@ -71,5 +78,4 @@
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="script.js"></script>
 </body>
-
 </html>

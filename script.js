@@ -31,3 +31,12 @@ function getMensages() {
  `;
 }
 // getMensages();
+
+// function menu 
+
+function toggleMenu() {
+  const menuLateral = document.querySelector('.menu-lateral');
+  const fundoMenu = document.querySelector('.fundo-menu');
+  menuLateral.classList.toggle('active');
+  fundoMenu.classList.toggle('active');
+}
