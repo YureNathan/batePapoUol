@@ -29,33 +29,26 @@ body {
   }
 }
 .chat {
-  margin-top: 106px;
-}
-/* verificar se da pra acessar a váriavel css no js acredito que tenha trocar no backgroud-color */
-.chatMensagem {
-  --mensagemStatus: #dcdcdc;
-  --mensagemReservado: #ffdede;
-  --mensagemChat: #fff;
-}
-.chatMensagem {
-  background-color: var(--mensagemStatus);
-  height: 46px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 4px;
+  margin: 106px 0px;
   width: 100%;
 }
-span {
-  font-size: 0.875rem;
+
+.chatMensagem {
+  height: 46px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
 }
+
 .chatMensagem .time {
   color: #aaa;
 }
 .chatMensagem .user {
   font-weight: bold;
 }
+
 .rodape {
   background-color: #fff;
   display: flex;

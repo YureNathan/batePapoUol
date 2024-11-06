@@ -43,34 +43,20 @@
         </li>
       </ul>
     </section>
-    <div class="fundo-menu" onclick="toggleMenu()"></div>
+    <div class="fundo-menu" onclick="menuEscondido()"></div>
     <header class="topo">
       <img src="./images/logo.png" alt="logo bate-papo">
-      <ion-icon onclick="toggleMenu()" name="people" class="icone-people"></ion-icon>
+      <ion-icon onclick="menuEscondido()" name="people" class="icone-people"></ion-icon>
     </header>
     <section class="chat">
-      <div class="chatMensagem">
-        <span class="time">(09:21:45)</span>
-        <span class="user">Jumo</span>
-        <span class="texto">entra na sala...</span>
-      </div>
-      <div class="chatMensagem">
-        <span class="time">(09:21:45)</span>
-        <span class="user">Jumo</span>
-        <span class="texto">entra na sala...</span>
-      </div>
-      <div class="chatMensagem">
-        <span class="time">(09:21:45)</span>
-        <span class="user">Jumo</span>
-        <span class="texto">entra na sala...</span>
-      </div>
+
     </section>
     <footer class="rodape">
       <div class="rodapeMensagem">
-        <input type="text" class="mensagem" placeholder="Escreva aqui...">
+        <input type="text" class="mensagem" placeholder="Escreva aqui..." required autofocus>
         <p class="tipoSala">Enviando para Todos (público)</p>
       </div>
-      <ion-icon class="botao" name="paper-plane-outline"></ion-icon>
+      <ion-icon class="botao" name="paper-plane-outline" onclick="enviarMensagem()"></ion-icon>
     </footer>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
