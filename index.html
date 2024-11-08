@@ -2,14 +2,14 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="reset.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-  <link rel="icon" href="./images/favicon.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="reset.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="./images/favicon.ico" />
   <title>Bate Papo - UOL</title>
 </head>
 
@@ -17,43 +17,30 @@
   <main class="conteudo">
     <section class="menu-lateral">
       <h2>Escolha um contato para enviar mensagem:</h2>
-      <ul class="usuarios">
-        <li>
-          <ion-icon name="people"></ion-icon>
-          <span>Todos</span>
-          <ion-icon name="checkmark" class="check"></ion-icon>
-        </li>
-        <li>
-          <ion-icon name="person-circle"></ion-icon>
-          <span>user maria</span>
-        </li>
-        <li>
-          <ion-icon name="person-circle"></ion-icon>
-          <span>user maria da silva</span>
-        </li>
-      </ul>
+      <ul class="usuarios"></ul>
       <h2>Escolha a visibilidade:</h2>
-      <ul>
-        <li><ion-icon name="lock-open"></ion-icon>
+      <ul class="visibilidade">
+        <li onclick="selecionarVisibilidade('message', this)">
+          <ion-icon name="lock-open"></ion-icon>
           <span>Público</span>
+          <ion-icon name="checkmark" class="check" style="display: none"></ion-icon>
         </li>
-        <li><ion-icon name="lock-closed"></ion-icon>
+        <li onclick="selecionarVisibilidade('private_message', this)">
+          <ion-icon name="lock-closed"></ion-icon>
           <span>Reservadamente</span>
-          <ion-icon name="checkmark" class="check"></ion-icon>
+          <ion-icon name="checkmark" class="check" style="display: none"></ion-icon>
         </li>
       </ul>
     </section>
     <div class="fundo-menu" onclick="menuEscondido()"></div>
     <header class="topo">
-      <img src="./images/logo.png" alt="logo bate-papo">
+      <img src="./images/logo.png" alt="logo bate-papo" />
       <ion-icon onclick="menuEscondido()" name="people" class="icone-people"></ion-icon>
     </header>
-    <section class="chat">
-
-    </section>
+    <section class="chat"></section>
     <footer class="rodape">
       <div class="rodapeMensagem">
-        <input type="text" class="mensagem" placeholder="Escreva aqui..." required autofocus>
+        <input type="text" class="mensagem" placeholder="Escreva aqui..." required autofocus />
         <p class="tipoSala">Enviando para Todos (público)</p>
       </div>
       <ion-icon class="botao" name="paper-plane-outline" onclick="enviarMensagem()"></ion-icon>

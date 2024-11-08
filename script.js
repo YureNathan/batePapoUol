@@ -2,26 +2,27 @@ const url = "https://mock-api.driven.com.br/api/v6/uol/";
 
 let usuario;
 let tempoUsuario;
+let destinatario = "Todos";
+let visibilidade = "message";
 
 function entrarSala() {
   usuario = prompt("Qual seu nome?");
-  if (usuario === null) {
-    return;
-  }
+  if (!usuario) return;
   axios
-    .post(url + "participants/f2dd5a8d-9ac0-42c8-8dc8-8853b8765425", {
+    .post(url + "participants/f0866e72-44ff-4d60-8a06-e2d391072b87", {
       name: usuario,
     })
     .then(() => {
       alert("Nome cadastrado com sucesso!");
-      // aqui vai ser as chamadas das funções e setTimeOut das funções
       verificarConexao();
       buscarMensagens();
       setInterval(buscarMensagens, 3000);
+      buscarParticipantes();
+      setInterval(buscarParticipantes, 10000);
     })
     .catch((error) => {
       if (error.response.status === 400) {
-        alert("Usuário com esse nome já existe. Tente novamente.");
+        alert("Erro ao registrar usuário. Tente novamente.");
         entrarSala();
       }
     });
@@ -30,12 +31,10 @@ function entrarSala() {
 function verificarConexao() {
   tempoUsuario = setInterval(() => {
     axios
-      .post(url + "status/f2dd5a8d-9ac0-42c8-8dc8-8853b8765425", {
+      .post(url + "status/f0866e72-44ff-4d60-8a06-e2d391072b87", {
         name: usuario,
       })
-      .then(() => {
-        console.log("Usuário ainda está presente.");
-      })
+      .then(() => {})
       .catch(() => {
         usuarioDeslogado();
       });
@@ -43,71 +42,132 @@ function verificarConexao() {
 }
 function usuarioDeslogado() {
   clearInterval(tempoUsuario);
-  console.log("usuário saiu da sala.");
 }
 
-function renderizarMensagens(mensagem) {
+function renderizarMensagens(mensagens) {
   const chat = document.querySelector(".chat");
-  let html = "";
-  mensagem.forEach((conteudo) => {
+  chat.innerHTML = "";
+
+  mensagens.forEach((mensagem) => {
     let tipoCorMensagem = "";
     let textoMensagem = "";
-    switch (conteudo.type) {
-      case "status":
-        tipoCorMensagem = "#dcdcdc";
-        textoMensagem = ` <p class="time">(${conteudo.time})</p>
-        <p class="user">${conteudo.from}</p>
-        <p class="texto">${conteudo.text}</p>`;
-        break;
-      case "message":
-        tipoCorMensagem = "#fff";
-        textoMensagem = `<p class="time">(${conteudo.time})</p>
-        <p class="user">${conteudo.from}</p>
-        <span>para</span>
-        <p class="user">${conteudo.to}</p>
-        <span>:</span>
-        <p class="texto">${conteudo.text}</p>`;
-        break;
-      case "private_message":
-        tipoCorMensagem = "#ffdede";
-        textoMensagem = `<p class="time">(${conteudo.time})</p> <p class="user">${conteudo.from}</p><span>reservadamente para</span><p class="user">${conteudo.to}</p><span>:</span><p class="texto">${conteudo.text}</p>`;
-        break;
-      default:
-        tipoCorMensagem = "#fff";
-        textoMensagem = `<span class="time">(${conteudo.time})</span> <strong>${conteudo.from}</strong> ${conteudo.text}`;
+
+    if (mensagem.type === "status") {
+      tipoCorMensagem = "#dcdcdc";
+      textoMensagem = `<p class="time">(${mensagem.time})</p><p class="user">${mensagem.from}</p><p class="texto">${mensagem.text}</p>`;
+    } else if (mensagem.type === "message") {
+      tipoCorMensagem = "#fff";
+      textoMensagem = `<p class="time">(${mensagem.time})</p><p class="user">${mensagem.from}</p><span>para</span><p class="user">${mensagem.to}</p><span>:</span><p class="texto">${mensagem.text}</p>`;
+    } else if (
+      mensagem.type === "private_message" &&
+      (mensagem.to === usuario ||
+        mensagem.from === usuario ||
+        mensagem.to === "Todos")
+    ) {
+      tipoCorMensagem = "#ffdede";
+      textoMensagem = `<p class="time">(${mensagem.time})</p><p class="user">${mensagem.from}</p><span>reservadamente para</span><p class="user">${mensagem.to}</p><span>:</span><p class="texto">${mensagem.text}</p>`;
+    } else {
+      return;
     }
-    html += `<div class="chatMensagem" style="background-color: ${tipoCorMensagem}">
+    chat.innerHTML += `<div class="chatMensagem" style="background-color: ${tipoCorMensagem}">
         ${textoMensagem}
       </div>`;
   });
-  chat.innerHTML = html;
+  chat.lastElementChild?.scrollIntoView();
 }
 function buscarMensagens() {
   const promess = axios.get(
-    url + "messages/f2dd5a8d-9ac0-42c8-8dc8-8853b8765425"
+    url + "messages/f0866e72-44ff-4d60-8a06-e2d391072b87"
   );
   promess.then((response) => {
     renderizarMensagens(response.data);
   });
 }
-entrarSala();
-// fazer a funcionalidade selecionar para quem quer enviar mensagem
+
 function enviarMensagem() {
   const conteudoMensagem = document.querySelector(".mensagem").value;
+  if (!conteudoMensagem) return;
 
   const mensagem = {
     from: usuario,
-    to: "Todos",
+    to: destinatario,
     text: conteudoMensagem,
-    type: "message",
+    type: visibilidade,
   };
   const response = axios.post(
-    url + "messages/f2dd5a8d-9ac0-42c8-8dc8-8853b8765425",
+    url + "messages/f0866e72-44ff-4d60-8a06-e2d391072b87",
     mensagem
   );
-  response.then(buscarMensagens);
-  response.catch(console.error.response);
-  document.querySelector(".mensagem").value = "";
+  response.then(() => {
+    buscarMensagens();
+    document.querySelector(".mensagem").value = "";
+  });
+  response.catch((error) => {
+    console.error("Erro ao enviar mensagem:", error);
+    alert("O usuário Foi deslogado.");
+    window.location.reload();
+  });
+}
+
+function renderizarParticipantes(contato) {
+  const ul = document.querySelector(".usuarios");
+  ul.innerHTML = `
+  <li onclick="selecionarContato('Todos', this)">
+    <ion-icon name="people"></ion-icon>
+    <span>Todos</span>
+    <ion-icon name="checkmark" class="check" style="display: ${
+      destinatario === "Todos" ? "inline" : "none"
+    };"></ion-icon>
+  </li>`;
+  contato.forEach((participante) => {
+    if (participante.name !== usuario) {
+      ul.innerHTML += `<li class="user" onclick="selecionarContato('${
+        participante.name
+      }', this)">
+        <ion-icon name="people"></ion-icon>
+        <span>${participante.name}</span>
+        <ion-icon name="checkmark" class="check" style="display: ${
+          destinatario === participante.name ? "inline" : "none"
+        };"></ion-icon>
+      </li>`;
+    }
+  });
+}
+
+function selecionarContato(nome, elemento) {
+  destinatario = nome;
+  atualizarSelecao(elemento, ".usuarios li");
+  atualizarMensagemDestinatario();
+}
+
+function selecionarVisibilidade(tipo, elemento) {
+  visibilidade = tipo;
+  atualizarSelecao(elemento, ".visibilidade li");
+  atualizarMensagemDestinatario();
+}
+
+function atualizarMensagemDestinatario() {
+  const tipoSalaElemento = document.querySelector(".tipoSala");
+  tipoSalaElemento.innerText = `Enviando para ${destinatario} ${
+    visibilidade === "private_message" ? "(reservadamente)" : "(público)"
+  }`;
+}
+function atualizarSelecao(elementoSelecionado, classe) {
+  document.querySelectorAll(classe).forEach((elemento) => {
+    elemento.classList.remove("selecionado");
+    elemento.querySelector(".check").style.display = "none";
+  });
+  elementoSelecionado.classList.add("selecionado");
+  elementoSelecionado.querySelector(".check").style.display = "inline";
+}
+
+function buscarParticipantes() {
+  axios
+    .get(url + "participants/f0866e72-44ff-4d60-8a06-e2d391072b87")
+    .then((response) => renderizarParticipantes(response.data))
+    .catch(() => {
+      console.error("Erro ao buscar participantes:");
+    });
 }
 
 function menuEscondido() {
@@ -116,3 +176,5 @@ function menuEscondido() {
   menuLateral.classList.toggle("active");
   fundoMenu.classList.toggle("active");
 }
+
+entrarSala();
