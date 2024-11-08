@@ -10,7 +10,7 @@ Este é um projeto de bate-papo inspirado no antigo Bate-Papo UOL, criado com Ja
 
 - **Interface Amigável para Mobile**: Interface minimalista e feita para uso em dispositivos móveis.
 - **Bate-Papo em Tempo Real**: insira seu nome e converse com outros usuários em tempo real.
-- ** Conversas Privadas**: Escolha entre chats em grupo (Todos) ou conversas privadas selecionando pelo menu a outra pessoa.
+- **Conversas Privadas**: Escolha entre chats em grupo (Todos) ou conversas privadas selecionando pelo menu a outra pessoa.
 - **Envio de Mensagens**: Envie e receba mensagens instantaneamente.
 - **Experiência Nostálgica**: Inspirado no saudoso Bate-Papo UOL.
 
